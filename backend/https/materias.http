@@ -1,0 +1,42 @@
+@url=http://localhost:3000
+
+
+###ver todas las materia
+GET {{url}}/materias
+Content-Type: application/application/json
+
+
+### crear nuevas materias
+POST {{url}}/materias
+Content-Type: application/json
+
+{
+    "nombre": "matematicas I",
+    "codigo": "104",
+    "año": 1
+}
+
+### crear nuevas materias
+POST {{url}}/materias
+Content-Type: application/json
+
+{
+    "nombre": "programacion I",
+    "codigo": "102",
+    "año": 1
+}
+
+
+### actualizar una materia 
+PUT {{url}}/materias/4
+Content-Type: application/json
+
+{
+    "nombre": "Matematicas II",
+    "codigo": 101,
+    "año": 1
+}
+
+
+### eliminar materias
+DELETE {{url}}/materias/4
