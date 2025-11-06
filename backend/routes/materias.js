@@ -10,9 +10,15 @@ const router = express.Router()
 router.get("/", async(req, res)=>{
     const [rows] = await db.query("SELECT * FROM materia");
     res.json(rows)
+    console.log("GET /materias:", rows)
+
+    if (rows.length ===0){
+        return res.status(404).json({success: false, message: "No hay materias cargadas"})
+    }
+    return res.status(200).json({success: true, data: rows})
 })
 
-//materia por id
+//obtener materia por id
 router.get(
     "/:id",
     validarId,
@@ -25,7 +31,7 @@ router.get(
             return res.status(404)
             .json({success: false, message:"Materia no encontrada"})
         }
-        res.json({success: true, data: rows[0]})
+        res.status(200).json({success: true, data: rows[0]})
     }
 )
 
@@ -102,7 +108,7 @@ router.put(
                 id,
             ]
         );
-        res.json({
+        res.status(200).json({
             success: true,
             message: "Materia actualizada correctamente",
             data: {id, nombre: nombre ?? rows[0].nombre,
@@ -127,7 +133,7 @@ router.delete(
             .json({success: false, message: "Materia no encontrada"});
         }
         await db.query("DELETE FROM materia WHERE id = ?", [id])
-        res.json({
+        res.status(200).json({
             success: true,
             message: "Materia eliminada correctamente"
         })

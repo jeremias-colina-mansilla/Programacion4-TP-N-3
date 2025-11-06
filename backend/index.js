@@ -3,6 +3,7 @@ import { conectarDB } from "./db.js"
 import cors from "cors"
 
 import materiaRoutes from "./routes/materias.js"
+import alumnosRoutes from "./routes/alumnos.js"
 conectarDB();
 
 const app = express();
@@ -15,7 +16,7 @@ app.use(express.json())
 app.use(cors())
 
 app.use("/materias", materiaRoutes)
-
+app.use("/alumnos", alumnosRoutes)
 app.get("/", (req, res)=>{
     res.send("notas para los alumnos")
 })
