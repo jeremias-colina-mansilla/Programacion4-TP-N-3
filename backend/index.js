@@ -1,9 +1,12 @@
 import express from "express"
 import { conectarDB } from "./db.js"
 import cors from "cors"
-
+import passport from "passport"
+import { authConfig } from "./routes/auth.js"
 import materiaRoutes from "./routes/materias.js"
 import alumnosRoutes from "./routes/alumnos.js"
+import usuariosRoutes from "./routes/usuario.js"
+import authRoutes from "./routes/auth.js"
 conectarDB();
 
 const app = express();
@@ -11,12 +14,16 @@ const port = 3000;
 
 
 app.use(express.json())
-
-
 app.use(cors())
+
+authConfig();
+app.use(passport.initialize())
 
 app.use("/materias", materiaRoutes)
 app.use("/alumnos", alumnosRoutes)
+app.use("/usuario", usuariosRoutes)
+app.use("/auth", authRoutes)
+
 app.get("/", (req, res)=>{
     res.send("notas para los alumnos")
 })

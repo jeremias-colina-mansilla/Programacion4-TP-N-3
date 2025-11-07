@@ -1,0 +1,52 @@
+@url = http://localhost:3000
+
+###  LOGIN (obtené tu token)
+# @name login
+POST {{url}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "pedro@gmail.com",
+  "password": "pedro1234"
+}
+
+### Guarda el token del login
+@token = {{login.response.body.token}}
+
+
+### Obtener todos los usuarios (requiere token)
+GET {{url}}/usuario
+Authorization: Bearer {{token}}
+
+
+### Obtener un usuario por ID
+GET {{url}}/usuario/1
+Authorization: Bearer {{token}}
+
+
+### Crear un nuevo usuario
+POST {{url}}/usuario
+Content-Type: application/json
+
+{
+  "nombre": "Pedro Pérez",
+  "email": "pedro@gmail.com",
+  "password": "pedro1234"
+}
+
+
+###  Actualizar un usuario existente
+PUT {{url}}/usuario/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "nombre": "jeremias colina",
+  "email": "jere@gmail.com",
+  "password": "jere1234"
+}
+
+
+### Eliminar un usuario por ID
+DELETE {{url}}/usuario/1
+Authorization: Bearer {{token}}
