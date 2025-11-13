@@ -15,17 +15,17 @@ Content-Type: application/json
 
 
 ### Obtener todos los usuarios (requiere token)
-GET {{url}}/usuario
+GET {{url}}/usuarios
 Authorization: Bearer {{token}}
 
 
 ### Obtener un usuario por ID
-GET {{url}}/usuario/1
+GET {{url}}/usuarios/1
 Authorization: Bearer {{token}}
 
 
 ### Crear un nuevo usuario
-POST {{url}}/usuario
+POST {{url}}/usuarios
 Content-Type: application/json
 
 {
@@ -36,7 +36,7 @@ Content-Type: application/json
 
 
 ###  Actualizar un usuario existente
-PUT {{url}}/usuario/1
+PUT {{url}}/usuarios/1
 Authorization: Bearer {{token}}
 Content-Type: application/json
 
@@ -48,5 +48,5 @@ Content-Type: application/json
 
 
 ### Eliminar un usuario por ID
-DELETE {{url}}/usuario/1
+DELETE {{url}}/usuarios/1
 Authorization: Bearer {{token}}
