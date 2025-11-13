@@ -18,7 +18,7 @@ GET {{url}}/notas
 Authorization: Bearer {{token}}
 
 ### Obtener una nota por ID
-GET {{url}}/notas/6
+GET {{url}}/notas/1
 Authorization: Bearer {{token}}
 
 ### Crear nueva nota
@@ -35,7 +35,7 @@ Content-Type: application/json
 }
 
 ### ✏️ Actualizar una nota existente
-PUT {{url}}/notas/3
+PUT {{url}}/notas/1
 Authorization: Bearer {{token}}
 Content-Type: application/json
 
@@ -48,5 +48,5 @@ Content-Type: application/json
 }
 
 ### Eliminar una nota
-DELETE {{url}}/notas/6
+DELETE {{url}}/notas/7
 Authorization: Bearer {{token}}

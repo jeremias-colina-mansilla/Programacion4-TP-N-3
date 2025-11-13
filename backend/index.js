@@ -23,7 +23,7 @@ app.use(passport.initialize())
 
 app.use("/materias", materiaRoutes)
 app.use("/alumnos", alumnosRoutes)
-app.use("/usuario", usuariosRoutes)
+app.use("/usuarios", usuariosRoutes)
 app.use("/notas", notasRoutes)
 app.use("/auth", authRoutes)
 
