@@ -1,0 +1,52 @@
+@url = http://localhost:3000
+
+###  Iniciar sesión y guardar token
+# @name login
+POST {{url}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "jere@gmail.com",
+  "password": "jere1234"
+}
+
+###
+@token = {{login.response.body.token}}
+
+### Obtener todas las notas
+GET {{url}}/notas
+Authorization: Bearer {{token}}
+
+### Obtener una nota por ID
+GET {{url}}/notas/6
+Authorization: Bearer {{token}}
+
+### Crear nueva nota
+POST {{url}}/notas
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "alumno_id": 2,
+  "materia_id": 2,
+  "nota1": 8.50,
+  "nota2": 7.25,
+  "nota3": 9.00
+}
+
+### ✏️ Actualizar una nota existente
+PUT {{url}}/notas/3
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "alumno_id": 1,
+  "materia_id": 2,
+  "nota1": 9.50,
+  "nota2": 8.00,
+  "nota3": 9.25
+}
+
+### Eliminar una nota
+DELETE {{url}}/notas/6
+Authorization: Bearer {{token}}

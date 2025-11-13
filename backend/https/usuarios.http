@@ -6,8 +6,8 @@ POST {{url}}/auth/login
 Content-Type: application/json
 
 {
-  "email": "pedro@gmail.com",
-  "password": "pedro1234"
+  "email": "jere@gmail.com",
+  "password": "jere1234"
 }
 
 ### Guarda el token del login
@@ -29,9 +29,9 @@ POST {{url}}/usuario
 Content-Type: application/json
 
 {
-  "nombre": "Pedro Pérez",
-  "email": "pedro@gmail.com",
-  "password": "pedro1234"
+  "nombre": "juan Pérez",
+  "email": "juan@gmail.com",
+  "password": "juan1234"
 }
 
 

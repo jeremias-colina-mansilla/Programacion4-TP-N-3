@@ -9,7 +9,6 @@ const router = express.Router()
 // obtener todas la materias
 router.get("/", async(req, res)=>{
     const [rows] = await db.query("SELECT * FROM materia");
-    res.json(rows)
     console.log("GET /materias:", rows)
 
     if (rows.length ===0){

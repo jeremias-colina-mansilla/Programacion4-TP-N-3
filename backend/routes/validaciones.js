@@ -26,3 +26,11 @@ export const validarAlumno = [
 
 ];
 
+
+export const validarNota= [
+  body("alumno_id").isInt({min: 1}),
+  body("materia_id").isInt({min:1}),
+  body("nota1").isFloat({min: 0, max: 10}).withMessage("La nota 1 debe ser un numero entre 0 y 10"),
+  body("nota2").isFloat({min: 0, max: 10}).withMessage("La nota 1 debe ser un numero entre 0 y 10"),
+  body("nota3").isFloat({min: 0, max: 10}).withMessage("La nota 1 debe ser un numero entre 0 y 10"),
+]

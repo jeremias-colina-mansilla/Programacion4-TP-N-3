@@ -7,6 +7,8 @@ import materiaRoutes from "./routes/materias.js"
 import alumnosRoutes from "./routes/alumnos.js"
 import usuariosRoutes from "./routes/usuario.js"
 import authRoutes from "./routes/auth.js"
+import notasRoutes from "./routes/notas.js"
+
 conectarDB();
 
 const app = express();
@@ -22,7 +24,9 @@ app.use(passport.initialize())
 app.use("/materias", materiaRoutes)
 app.use("/alumnos", alumnosRoutes)
 app.use("/usuario", usuariosRoutes)
+app.use("/notas", notasRoutes)
 app.use("/auth", authRoutes)
+
 
 app.get("/", (req, res)=>{
     res.send("notas para los alumnos")

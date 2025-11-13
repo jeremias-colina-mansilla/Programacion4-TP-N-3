@@ -9,7 +9,7 @@ import { Strategy, ExtractJwt } from "passport-jwt";
 
 const app = express.Router();
 
-// ⚙️ Configuración Passport-JWT
+
 export function authConfig() {
   const jwtOptions = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -23,12 +23,12 @@ export function authConfig() {
   );
 }
 
-// 🔐 Middleware para rutas protegidas
+// Middleware para rutas protegidas
 export const verificarAutenticacion = passport.authenticate("jwt", {
   session: false,
 });
 
-// 🚪 Login
+// Login
 app.post(
   "/login",
   body("email").isEmail().withMessage("Debe ser un email válido"),
@@ -37,7 +37,7 @@ app.post(
   async (req, res) => {
     const { email, password } = req.body;
 
-    // Buscar usuario
+    
     const [usuarios] = await db.query("SELECT * FROM usuario WHERE email = ?", [email]);
 
     if (usuarios.length === 0) {
@@ -45,14 +45,13 @@ app.post(
     }
 
     const usuario = usuarios[0];
-
-    // Comparar contraseña
+    
     const passwordOk = await bcrypt.compare(password, usuario.password);
     if (!passwordOk) {
       return res.status(400).json({ success: false, error: "Contraseña incorrecta" });
     }
 
-    // Generar token (expira en 4h)
+    
     const payload = { userId: usuario.id, email: usuario.email };
     const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "4h" });
 
