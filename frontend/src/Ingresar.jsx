@@ -5,7 +5,7 @@ export const Ingresar = () => {
   const { login } = useAuth();
 
   const [open, setOpen] = useState(false);
-  const [modo, setModo] = useState("login"); // "login" o "registro"
+  const [modo, setModo] = useState("login"); 
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -30,7 +30,7 @@ export const Ingresar = () => {
         setOpen(false);
         resetForm();
       } else {
-        setError(result.message || "Error al iniciar sesión");
+        setError(result.message || "Error al iniciar sesión contraseña o email invalido");
       }
     } else {
       if (!nombre || !email || !password || !confirmPassword) {
