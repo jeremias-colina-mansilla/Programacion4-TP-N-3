@@ -1,39 +1,59 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import "@picocss/pico";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Layout } from "./Layout.jsx";
-import { AuthProvider, AuthPage } from "./Auth.jsx";
+import { AuthProvider, AuthPage } from "./Auth";
+import { Layout } from "./Layout";
 
-import { Usuarios } from "./Usuarios.jsx";
-import { Alumnos } from "./Alumnos.jsx";
-import { Materias } from "./Materias.jsx"
-import { Notas } from "./Notas.jsx";
+// Usuarios
+import { Usuarios } from "./usuarios/Usuarios";
+import { CrearUsuario } from "./usuarios/CrearUsuario";
+import { ModificarUsuario } from "./usuarios/ModificarUsuario";
 
-import { Ingresar } from "./Ingresar.jsx";
+// Alumnos
+import { Alumnos } from "./alumnos/Alumnos";
+import { CrearAlumno } from "./alumnos/CrearAlumno";
+import { ModificarAlumno } from "./alumnos/ModificarAlumno";
 
-createRoot(document.getElementById("root")).render(
-  <StrictMode>
+// Materias
+import { Materias } from "./materias/Materias";
+import { CrearMateria } from "./materias/CrearMateria";
+import { ModificarMateria } from "./materias/ModificarMateria";
+
+// Notas
+import { Notas } from "./notas/Notas";
+import { CrearNota } from "./notas/CrearNotas";
+import { ModificarNota } from "./notas/ModificarNotas";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
     <AuthProvider>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
-            {/* Página de inicio */}
-            <Route index element={<AuthPage><div>Bienvenido a la aplicación</div></AuthPage>} />
 
-            {/* Página de login pública */}
-            <Route path="login" element={<Ingresar />} />
+            <Route index element={<AuthPage><h2>Bienvenido</h2></AuthPage>} />
 
-            {/* Rutas protegidas */}
             <Route path="usuarios" element={<AuthPage><Usuarios /></AuthPage>} />
+            <Route path="usuarios/crear" element={<AuthPage><CrearUsuario /></AuthPage>} />
+            <Route path="usuarios/:id/modificar" element={<AuthPage><ModificarUsuario /></AuthPage>} />
+
             <Route path="alumnos" element={<AuthPage><Alumnos /></AuthPage>} />
+            <Route path="alumnos/crear" element={<AuthPage><CrearAlumno /></AuthPage>} />
+            <Route path="alumnos/:id/modificar" element={<AuthPage><ModificarAlumno /></AuthPage>} />
+
             <Route path="materias" element={<AuthPage><Materias /></AuthPage>} />
+            <Route path="materias/crear" element={<AuthPage><CrearMateria /></AuthPage>} />
+            <Route path="materias/:id/modificar" element={<AuthPage><ModificarMateria /></AuthPage>} />
+            
             <Route path="notas" element={<AuthPage><Notas /></AuthPage>} />
+            <Route path="notas/crear" element={<AuthPage><CrearNota /></AuthPage>} />
+            <Route path="notas/:id/modificar" element={<AuthPage><ModificarNota /></AuthPage>} />
+
           </Route>
         </Routes>
       </BrowserRouter>
     </AuthProvider>
-  </StrictMode>
+  </React.StrictMode>
 );

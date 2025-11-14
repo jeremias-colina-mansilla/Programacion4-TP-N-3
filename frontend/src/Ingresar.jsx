@@ -12,7 +12,6 @@ export const Ingresar = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const result = await login(email, password);
     if (result.success) {
       setOpen(false);
@@ -25,11 +24,12 @@ export const Ingresar = () => {
   return (
     <>
       <button onClick={() => setOpen(true)}>Ingresar</button>
-      <dialog open={open}>
-        <article>
-          <h2>Ingrese usuario y contraseña</h2>
-          <form onSubmit={handleSubmit}>
-            <fieldset>
+
+      {open && (
+        <div className="login-modal-overlay" onClick={() => setOpen(false)}>
+          <div className="login-modal" onClick={(e) => e.stopPropagation()}>
+            <h2>Ingrese usuario y contraseña</h2>
+            <form onSubmit={handleSubmit}>
               <label>Email:</label>
               <input
                 type="email"
@@ -44,30 +44,16 @@ export const Ingresar = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
-              {error && <p style={{ color: "red" }}>{error}</p>}
-            </fieldset>
-            <footer>
-              <div className="grid">
-                <input
-                  type="button"
-                  className="secondary"
-                  value="Cancelar"
-                  onClick={() => setOpen(false)}
-                />
-                <input type="submit" value="Ingresar" />
-                <Link
-                  to="/usuarios/crear"
-                  role="button"
-                  className="contrast"
-                  onClick={() => setOpen(false)}
-                >
-                  Registrarse
-                </Link>
+              {error && <p className="login-error">{error}</p>}
+              <div className="login-buttons">
+                <button type="button" className="secondary" onClick={() => setOpen(false)}>Cancelar</button>
+                <button type="submit">Ingresar</button>
+                <Link to="/usuarios/crear" className="contrast" onClick={() => setOpen(false)}>Registrarse</Link>
               </div>
-            </footer>
-          </form>
-        </article>
-      </dialog>
+            </form>
+          </div>
+        </div>
+      )}
     </>
   );
 };
