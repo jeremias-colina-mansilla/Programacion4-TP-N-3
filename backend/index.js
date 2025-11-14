@@ -35,7 +35,7 @@ app.get("/", (req, res)=>{
 
 // Middleware para manejar errores del servidor (500)
 app.use((err, req, res, next) => {
-  console.error("🔥 Error interno del servidor:", err);
+  console.error("Error interno del servidor:", err);
   res.status(500).json({
     success: false,
     message: "Error interno del servidor. Intente nuevamente más tarde.",

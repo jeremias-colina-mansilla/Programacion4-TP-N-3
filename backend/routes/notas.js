@@ -1,14 +1,14 @@
 import express from "express";
 import { db } from "../db.js";
 import { verificarAutenticacion } from "./auth.js";
-import { validarNota, validarId, verificarValidaciones } from "./validaciones.js";
+import { validarNota, validarId, verificarValidaciones, validarNotaActualizar } from "./validaciones.js";
 
 const router = express.Router();
 
-// 🔐 Proteger todas las rutas
+//  Proteger todas las rutas
 router.use(verificarAutenticacion);
 
-// 📘 GET Obtener notas 
+//  GET Obtener notas 
 router.get("/", async (req, res) => {
   const [rows] = await db.execute(`
     SELECT 
@@ -61,20 +61,31 @@ router.get("/:id", validarId, verificarValidaciones, async (req, res) => {
   res.json({ success: true, data: rows[0] });
 });
 
-//  POST /notas 
+// POST /notas 
 router.post("/", validarNota, verificarValidaciones, async (req, res) => {
   const { alumno_id, materia_id, nota1, nota2, nota3 } = req.body;
 
+  // Verificar que todos los campos existan
+  if (!alumno_id || !materia_id || nota1 === undefined || nota2 === undefined || nota3 === undefined) {
+    return res.status(400).json({
+      success: false,
+      message: "Faltan datos obligatorios (alumno_id, materia_id, nota1, nota2, nota3).",
+    });
+  }
+
+  // Verificar existencia del alumno
   const [alumno] = await db.execute("SELECT id FROM alumno WHERE id = ?", [alumno_id]);
   if (alumno.length === 0) {
     return res.status(400).json({ success: false, message: "El alumno no existe." });
   }
 
+  // Verificar existencia de la materia
   const [materia] = await db.execute("SELECT id FROM materia WHERE id = ?", [materia_id]);
   if (materia.length === 0) {
     return res.status(400).json({ success: false, message: "La materia no existe." });
   }
 
+  // Verificar si ya existen notas del mismo alumno para la materia
   const [existe] = await db.execute(
     "SELECT id FROM nota WHERE alumno_id = ? AND materia_id = ?",
     [alumno_id, materia_id]
@@ -87,6 +98,7 @@ router.post("/", validarNota, verificarValidaciones, async (req, res) => {
     });
   }
 
+  // Crear la nota
   const [result] = await db.execute(
     "INSERT INTO nota (alumno_id, materia_id, nota1, nota2, nota3) VALUES (?, ?, ?, ?, ?)",
     [alumno_id, materia_id, nota1, nota2, nota3]
@@ -100,7 +112,7 @@ router.post("/", validarNota, verificarValidaciones, async (req, res) => {
 });
 
 //  PUT /notas/:id 
-router.put("/:id", [validarId, ...validarNota], verificarValidaciones, async (req, res) => {
+router.put("/:id", [validarId, ...validarNotaActualizar], verificarValidaciones, async (req, res) => {
   const { id } = req.params;
   const { nota1, nota2, nota3 } = req.body;
 

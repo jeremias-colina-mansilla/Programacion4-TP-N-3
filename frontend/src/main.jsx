@@ -32,21 +32,25 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
-
+            
             <Route index element={<AuthPage><h2>Bienvenido</h2></AuthPage>} />
 
+            {/* Usuarios */}
             <Route path="usuarios" element={<AuthPage><Usuarios /></AuthPage>} />
             <Route path="usuarios/crear" element={<AuthPage><CrearUsuario /></AuthPage>} />
             <Route path="usuarios/:id/modificar" element={<AuthPage><ModificarUsuario /></AuthPage>} />
 
+            {/* Alumnos */}
             <Route path="alumnos" element={<AuthPage><Alumnos /></AuthPage>} />
             <Route path="alumnos/crear" element={<AuthPage><CrearAlumno /></AuthPage>} />
             <Route path="alumnos/:id/modificar" element={<AuthPage><ModificarAlumno /></AuthPage>} />
 
+            {/* Materias */}
             <Route path="materias" element={<AuthPage><Materias /></AuthPage>} />
             <Route path="materias/crear" element={<AuthPage><CrearMateria /></AuthPage>} />
             <Route path="materias/:id/modificar" element={<AuthPage><ModificarMateria /></AuthPage>} />
-            
+
+            {/* Notas */}
             <Route path="notas" element={<AuthPage><Notas /></AuthPage>} />
             <Route path="notas/crear" element={<AuthPage><CrearNota /></AuthPage>} />
             <Route path="notas/:id/modificar" element={<AuthPage><ModificarNota /></AuthPage>} />

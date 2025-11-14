@@ -28,13 +28,13 @@ Content-Type: application/json
 
 {
   "alumno_id": 2,
-  "materia_id": 2,
+  "materia_id": 1,
   "nota1": 8.50,
   "nota2": 7.25,
   "nota3": 9.00
 }
 
-### ✏️ Actualizar una nota existente
+### Actualizar una nota existente
 PUT {{url}}/notas/1
 Authorization: Bearer {{token}}
 Content-Type: application/json
@@ -42,8 +42,8 @@ Content-Type: application/json
 {
   "alumno_id": 1,
   "materia_id": 2,
-  "nota1": 9.50,
-  "nota2": 8.00,
+  "nota1": 9,
+  "nota2": 8,
   "nota3": 9.25
 }
 

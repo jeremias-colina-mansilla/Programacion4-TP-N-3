@@ -34,3 +34,9 @@ export const validarNota= [
   body("nota2").isFloat({min: 0, max: 10}).withMessage("La nota 1 debe ser un numero entre 0 y 10"),
   body("nota3").isFloat({min: 0, max: 10}).withMessage("La nota 1 debe ser un numero entre 0 y 10"),
 ]
+
+export const validarNotaActualizar = [
+  body("nota1").isFloat({ min: 0, max: 10 }).withMessage("La nota 1 debe estar entre 0 y 10."),
+  body("nota2").isFloat({ min: 0, max: 10 }).withMessage("La nota 2 debe estar entre 0 y 10."),
+  body("nota3").isFloat({ min: 0, max: 10 }).withMessage("La nota 3 debe estar entre 0 y 10."),
+];
