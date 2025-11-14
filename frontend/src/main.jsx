@@ -9,7 +9,8 @@ import { Layout } from "./Layout";
 // Usuarios
 import { Usuarios } from "./usuarios/Usuarios";
 import { CrearUsuario } from "./usuarios/CrearUsuario";
-import { ModificarUsuario } from "./usuarios/ModificarUsuario";
+import { ModificarUsuario } from "./usuarios/ModificarUsuario"
+import { DetallesUsuario } from "./usuarios/DetallesUsuarios";
 
 // Alumnos
 import { Alumnos } from "./alumnos/Alumnos";
@@ -35,9 +36,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             
             <Route index element={<AuthPage><h2>Bienvenido</h2></AuthPage>} />
 
-            {/* Usuarios */}
+           {/* Usuarios */}
             <Route path="usuarios" element={<AuthPage><Usuarios /></AuthPage>} />
             <Route path="usuarios/crear" element={<AuthPage><CrearUsuario /></AuthPage>} />
+            <Route path="usuarios/:id" element={<AuthPage><DetallesUsuario /></AuthPage>} />
             <Route path="usuarios/:id/modificar" element={<AuthPage><ModificarUsuario /></AuthPage>} />
 
             {/* Alumnos */}
